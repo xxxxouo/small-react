@@ -81,6 +81,6 @@ function App() {
 import ReactDom from '@/react-dom'
 const root: any = document.querySelector('#root')
 
-// debugger
+debugger
 
 ReactDom.createRoot(root).render(<App />)

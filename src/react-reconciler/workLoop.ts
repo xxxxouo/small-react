@@ -41,12 +41,11 @@ function prepareFreshStack(root: FiberRootNode, lane: Lane) {
 	workInProgress = createWorkInProgress(root.current, {});
 	wipRootRenderLane = lane;
 }
-
 export function scheduleUpdateOnFiber(fiber: FiberNode, lane: Lane) {
 	// fiberRootNode
 	const root = markUpdateFromFiberToRoot(fiber);
-	markRootUpdated(root, lane);
-	ensureRootIsScheduled(root);
+	markRootUpdated(root, lane); // 更新fiberRootNode的pendingLanes 优先级 
+	ensureRootIsScheduled(root); // 调度fiberRootNode 优先级
 }
 
 // schedule阶段入口

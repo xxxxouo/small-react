@@ -9,6 +9,7 @@ import { Container } from './hostConfig';
 import { initEvent } from './SyntheticEvent';
 
 export function createRoot(container: Container) {
+	// 创建fiberRootNode 
 	const root = createContainer(container);
 	
 	return {
