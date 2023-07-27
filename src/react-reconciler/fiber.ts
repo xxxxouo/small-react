@@ -15,7 +15,7 @@ export class FiberNode {
 	tag: WorkTag;
 	pendingProps: Props;
 	key: Key;
-	stateNode: any;
+	stateNode: any; // 指向真实DOM
 	ref: Ref;
 
 	return: FiberNode | null;  // fiber 节点的父级
@@ -55,16 +55,16 @@ export class FiberNode {
 		this.ref = null;
 
 		// 作为工作单元
-		this.pendingProps = pendingProps;
-		this.memoizedProps = null;
-		this.memoizedState = null;
-		this.updateQueue = null;
-
-		this.alternate = null;
+		this.pendingProps = pendingProps; // 刚开始工作阶段的props 
+		this.memoizedProps = null;  // 工作结束后的props
+		this.memoizedState = null; // 更新后的state
+		this.updateQueue = null; // fiber产生的更新操作都放在更新队列中
+		// 通过是否为null 来判断是否是第一次渲染 还是更新
+		this.alternate = null; // 用于记录前后两次的fiber节点 用于diff比较 一旦更新了 会把current的值赋值给alternate
 		// 副作用
-		this.flags = NoFlags;
-		this.subtreeFlags = NoFlags;
-		this.deletions = null;
+		this.flags = NoFlags; // 副作用标记(删除, 更新, 插入等)
+		this.subtreeFlags = NoFlags; // 子树的副作用标记
+		this.deletions = null; // 存放要删除的子节点
 	}
 }
 
@@ -72,7 +72,6 @@ export interface PendingPassiveEffects {
 	unmount: Effect[];
 	update: Effect[];
 }
-
 export class FiberRootNode {
 	container: Container; // 容器
 	current: FiberNode;  // 当前的fiber节点

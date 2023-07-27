@@ -1,3 +1,6 @@
+// WorkTag 是fiber节点的类型	 
+// 用来判断两个Fiber节点是否是同一类型的节点 从而进行同层比较 然后比较其他属性(key, type, props...) 
+// 优化diff算法
 export type WorkTag = // fiber 节点的类型
 	| typeof FunctionComponent
 	| typeof HostRoot
