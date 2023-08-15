@@ -13,7 +13,7 @@ import { Effect } from './fiberHooks';
 export class FiberNode {
 	type: any;
 	tag: WorkTag;
-	pendingProps: Props;
+	pendingProps: Props; // 最新的属性 还没有更新到真实dom的属性
 	key: Key;
 	stateNode: any; // 指向真实DOM
 	ref: Ref;
@@ -55,15 +55,15 @@ export class FiberNode {
 		this.ref = null;
 
 		// 作为工作单元
-		this.pendingProps = pendingProps; // 刚开始工作阶段的props 
-		this.memoizedProps = null;  // 工作结束后的props
-		this.memoizedState = null; // 更新后的state
+		this.pendingProps = pendingProps; // 刚开始工作阶段的props  子元素的children ...
+		this.memoizedProps = null;  // 工作结束后的props 
+		this.memoizedState = null; // 更新后的state  组件的属性 都在里面 (react的组件都是对象)
 		this.updateQueue = null; // fiber产生的更新操作都放在更新队列中
 		// 通过是否为null 来判断是否是第一次渲染 还是更新
 		this.alternate = null; // 用于记录前后两次的fiber节点 用于diff比较 一旦更新了 会把current的值赋值给alternate
 		// 副作用
 		this.flags = NoFlags; // 副作用标记(删除, 更新, 插入等)
-		this.subtreeFlags = NoFlags; // 子树的副作用标记
+		this.subtreeFlags = NoFlags; // 子树的副作用标记 相当于当前节点下 所有子节点的flags合集 (用来判断是否需要更新)
 		this.deletions = null; // 存放要删除的子节点
 	}
 }
@@ -84,9 +84,9 @@ export class FiberRootNode {
 		this.current = hostRootFiber;
 		hostRootFiber.stateNode = this;
 		this.finishedWork = null;
-		this.pendingLanes = NoLanes;
-		this.finishedLane = NoLane;
-
+		this.pendingLanes = NoLanes; // 用来标记当前有哪些优先级的任务
+		this.finishedLane = NoLane; 
+		// 用来存放useEffect的副作用
 		this.pendingPassiveEffects = {
 			unmount: [],
 			update: []
