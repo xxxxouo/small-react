@@ -20,8 +20,8 @@ const workList= [];
 let prevPriority= IdlePriority;
 let curCallback = null;
 
-let time_log = 0;
-
+let time_log = 0; 
+// 优先级越高，数字越小 
 function shouldYield() {
     return window.React.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED.Scheduler.unstable_shouldYield.apply(
       this,
@@ -29,20 +29,20 @@ function shouldYield() {
     );
   }
 
-  function cancelCallback() {
+function cancelCallback() {
     return window.React.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED.Scheduler.unstable_cancelCallback.apply(
       this,
       arguments
     );
   }
-
+// 获取当前任务的优先级  以及时间相关信息
 function getFirstCallbackNode() {
     return window.React.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED.Scheduler.unstable_getFirstCallbackNode.apply(
       this,
       arguments
     );
 }
-
+// 任务调度器
 function scheduleCallback() {
     return window.React.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED.Scheduler.unstable_scheduleCallback.apply(
       this,
@@ -72,10 +72,10 @@ function scheduleCallback() {
 );
 
 function schedule() {
-	const cbNode = getFirstCallbackNode();
+	const cbNode = getFirstCallbackNode(); // 获取当前任务的优先级  以及时间相关信息
 
 	// [{priority: 3}, {priority: 2}]
-	// 当前的任务  把最高优先级挑选出来
+	// 当前的任务  把最高优先级挑选出来  优先级越高，数字越小
 	const curWork = workList.sort((w1, w2) => w1.priority - w2.priority)[0];
 	// debugger
 
@@ -132,13 +132,12 @@ function perform(work, didTimeout) {
 
 
 	const needSync = work.priority === ImmediatePriority || didTimeout;
-
 	console.log('perform执行任务', work)
 
 	// shouldYield 代表当前浏览器还要没有空闲时间
 	// shouldYield()会在while过程中，不断的去计算，此时我们还有没有剩余时间
 	// 一轮时间循环，留给任务处理的时间，大概7,8ms
-
+ 
 	while ((needSync || !shouldYield()) && work.count) {
 		work.count--;
 		insertSpan(work.priority + '');
@@ -179,7 +178,8 @@ function insertSpan(content) {
 	doSomeBuzyWork(5000000);
 	root?.appendChild(span);
 }
-
+ 
+// 模拟一些耗时操作
 function doSomeBuzyWork(len) {
 	let result = 0;
 	while (len--) {

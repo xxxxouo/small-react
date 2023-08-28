@@ -57,7 +57,7 @@ export class FiberNode {
 		// 作为工作单元
 		this.pendingProps = pendingProps; // 刚开始工作阶段的props  子元素的children ...
 		this.memoizedProps = null;  // 工作结束后的props 
-		this.memoizedState = null; // 更新后的state  组件的属性 都在里面 (react的组件都是对象)
+		this.memoizedState = null; // 更新后的state  组件的属性 都在里面 (react的组件都是对象) 
 		this.updateQueue = null; // fiber产生的更新操作都放在更新队列中
 		// 通过是否为null 来判断是否是第一次渲染 还是更新
 		this.alternate = null; // 用于记录前后两次的fiber节点 用于diff比较 一旦更新了 会把current的值赋值给alternate

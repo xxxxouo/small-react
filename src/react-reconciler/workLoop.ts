@@ -34,8 +34,8 @@ import {
 import { HookHasEffect, Passive } from './hookEffectTags';
 
 let workInProgress: FiberNode | null = null;
-let wipRootRenderLane: Lane = NoLane;
-let rootDoesHasPassiveEffects = false;
+let wipRootRenderLane: Lane = NoLane;  // 当前fiberRootNode的优先级
+let rootDoesHasPassiveEffects = false; // 是否存在副作用
 
 function prepareFreshStack(root: FiberRootNode, lane: Lane) {
 	workInProgress = createWorkInProgress(root.current, {});

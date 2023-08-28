@@ -16,10 +16,10 @@ import {
 } from './updateQueue';
 import { scheduleUpdateOnFiber } from './workLoop';
 
-let currentlyRenderingFiber: FiberNode | null = null;
-let workInProgressHook: Hook | null = null;
-let currentHook: Hook | null = null;
-let renderLane: Lane = NoLane;
+let currentlyRenderingFiber: FiberNode | null = null; // 当前正在渲染的fiber
+let workInProgressHook: Hook | null = null;// 当前正在处理的hook
+let currentHook: Hook | null = null; // 当前正在处理的hook 
+let renderLane: Lane = NoLane; // 当前渲染的lane
 
 const { currentDispatcher } = internals;
 interface Hook {
