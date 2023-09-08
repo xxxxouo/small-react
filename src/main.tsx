@@ -59,6 +59,10 @@ function App() {
 	function handle_click() {
 		debugger
 		setArr(['c', 'b', 'a'])
+		debugger
+		setArr(['a', 'b', 'c', 'd'])
+		debugger
+		setArr(['a'])
 	}
 	// a => a
 	// <div><p><li1><li2><li3></div>  手写

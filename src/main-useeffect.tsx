@@ -55,6 +55,7 @@ function Bpp() {
 
 function App() {
 	const [count, setCount] = useState(0)
+	debugger
 	const [count2, setCount2] = useState(2)
 	// 已经在递阶段，修改App的fiber对象
 	// a=>a
@@ -64,6 +65,7 @@ function App() {
 	useEffect(effect2)
 
 	function handle_click() {
+		debugger
 		setCount(count + 1)
 	}
 	// a => a
@@ -81,6 +83,6 @@ function App() {
 import ReactDom from '@/react-dom'
 const root: any = document.querySelector('#root')
 
-// debugger
+debugger
 
 ReactDom.createRoot(root).render(<App />)

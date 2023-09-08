@@ -95,7 +95,6 @@ function performSyncWorkOnRoot(root: FiberRootNode, lane: Lane) {
 	const nextLane = getHighestPriorityLane(root.pendingLanes);
 
 
-
 	if (nextLane !== SyncLane) {
 		// 其他比SyncLane低的优先级
 		// NoLane
@@ -106,7 +105,7 @@ function performSyncWorkOnRoot(root: FiberRootNode, lane: Lane) {
 
 	console.warn('render阶段开始');
 
-	// 初始化
+	// 初始化WIP
 	prepareFreshStack(root, lane);
 
 	do {

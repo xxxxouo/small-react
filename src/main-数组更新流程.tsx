@@ -65,7 +65,7 @@ function App() {
 		<div >
 			<button onClick={handle_click}>点我改变</button>
 			{arr.map((item) => {
-				return <h1>{item}</h1>
+				return <h1 key={item}>{item}</h1>
 			})}
 		</div>
 	);	
